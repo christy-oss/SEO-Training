@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO+GEO | 2026 E2E Process Training</title>
+<style>
+  :root {
+    --orange: #e86c2c;
+    --dark: #111;
+    --mid: #1e3a5f;
+    --accent: #2d5986;
+    --white: #fff;
+    --gray: #f5f5f5;
+    --text: #1a1a2e;
+    --muted: #6b7280;
+    --green: #10b981;
+    --yellow: #f59e0b;
+    --blue: #2563eb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f2f5; color: var(--text); }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--dark); padding: 12px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  }
+  .nav-logo { color: var(--orange); font-size: 18px; font-weight: 800; letter-spacing: 1px; }
+  .nav-logo span { color: rgba(255,255,255,0.6); font-weight: 300; }
+  .nav-center { display: flex; align-items: center; gap: 20px; }
+  .nav-progress { display: flex; gap: 5px; align-items: center; }
+  .nav-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.18); cursor: pointer; transition: all .2s; }
+  .nav-dot.active { background: var(--orange); transform: scale(1.35); }
+  .nav-dot.visited { background: rgba(232,108,44,0.45); }
+  .slide-counter { color: rgba(255,255,255,0.4); font-size: 11px; margin-left: 10px; }
+  .nav-templates-btn { 
+    background: rgba(232,108,44,0.15); 
+    border: 1px solid rgba(232,108,44,0.4);
+    color: var(--orange);
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .2s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .nav-templates-btn:hover {
+    background: rgba(232,108,44,0.25);
+    border-color: var(--orange);
+  }
+  
+  /* TEMPLATES MODAL */
+  .templates-modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .templates-modal.active { display: flex; }
+  .templates-content {
+    background: #fff;
+    border-radius: 16px;
+    max-width: 1100px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .templates-header {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2d5986 100%);
+    padding: 24px 32px;
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .templates-title {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 800;
+  }
+  .templates-close {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all .2s;
+  }
+  .templates-close:hover {
+    background: rgba(255,255,255,0.25);
+  }
+  .templates-body {
+    padding: 32px;
+  }
+
+  /* SLIDES */
+  .deck { padding-top: 58px; }
+  .slide { min-height: 100vh; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 56px 36px 48px; position: relative; overflow: hidden; }
+  .slide.active { display: flex; }
+
+  .slide-cover  { background: linear-gradient(135deg, #111 0%, #1e3a5f 100%); }
+  .slide-teal { background: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%); }
+  .slide-white  { background: #fff; }
+  .slide-gray   { background: #f5f5f5; }
+  .slide-dark   { background: linear-gradient(135deg, #1e3a5f 0%, #111 100%); }
+  .slide-green  { background: linear-gradient(135deg, #064e3b 0%, #065f46 100%); }
+  .slide-navy   { background: linear-gradient(135deg, #0f2d52 0%, #1e3a5f 100%); }
+
+  /* BIG BG NUMBER */
+  .bg-num { font-size: 120px; font-weight: 900; color: rgba(255,255,255,0.05); position: absolute; top: 40px; right: 48px; line-height: 1; pointer-events: none; }
+
+  /* COVER */
+  .cover-badge { background: rgba(232,108,44,0.18); border: 1px solid var(--orange); color: var(--orange); padding: 5px 16px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 22px; }
+  .cover-title { color: #fff; font-size: clamp(34px,5vw,62px); font-weight: 900; text-align: center; line-height: 1.1; margin-bottom: 14px; }
+  .cover-title .hi { color: var(--orange); }
+  .cover-sub { color: rgba(255,255,255,0.6); font-size: 17px; text-align: center; margin-bottom: 44px; max-width: 660px; line-height: 1.65; }
+
+  /* RESOURCE TILES */
+  .resource-section { width: 100%; max-width: 1080px; margin-bottom: 32px; }
+  .resource-label { color: rgba(255,255,255,0.45); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; text-align: center; }
+  .resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .resource-tile { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; text-decoration: none; display: flex; align-items: center; gap: 12px; transition: all .2s; }
+  .resource-tile:hover { background: rgba(255,255,255,0.14); transform: translateY(-2px); }
+  .resource-icon { font-size: 22px; flex-shrink: 0; }
+  .resource-text { flex: 1; }
+  .resource-name { color: #fff; font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+  .resource-desc { color: rgba(255,255,255,0.5); font-size: 10px; }
+
+  /* SECTION HEADER SLIDES */
+  .sec-label { color: rgba(255,255,255,0.45); font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+  .sec-title { color: #fff; font-size: clamp(26px,4vw,50px); font-weight: 900; margin-bottom: 18px; line-height: 1.15; max-width: 720px; }
+  .sec-desc { color: rgba(255,255,255,0.65); font-size: 16px; max-width: 600px; line-height: 1.75; margin-bottom: 36px; }
+
+  /* CONTENT WRAPPER */
+  .cw { width: 100%; max-width: 1080px; }
+  .slide-hdr { text-align: center; margin-bottom: 40px; }
+  .s-tag { display: inline-block; background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+  .s-title { font-size: clamp(20px,2.8vw,36px); font-weight: 800; color: var(--dark); margin-bottom: 8px; }
+  .s-sub { color: var(--muted); font-size: 15px; max-width: 580px; margin: 0 auto 16px; line-height: 1.6; }
+
+  /* LINKS ROW */
+  .links-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
+  .link-btn { display: inline-flex; align-items: center; gap: 6px; background: #f0f4fa; border: 1px solid #d0daea; color: #1a56b0; text-decoration: none; font-size: 12px; font-weight: 600; padding: 7px 14px; border-radius: 6px; transition: all .15s; }
+  .link-btn:hover { background: #dce8f9; transform: translateY(-1px); }
+  .link-btn svg { width: 14px; height: 14px; }
+
+  /* GRIDS */
+  .g2 { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 18px; width: 100%; max-width: 1080px; }
+  .g3 { display: grid; grid-template-columns: repeat(auto-fit,minmax(210px,1fr)); gap: 18px; width: 100%; max-width: 1080px; }
+
+  /* CARDS */
+  .card { background: #fff; border-radius: 14px; padding: 24px; box-shadow: 0 3px 16px rgba(0,0,0,0.07); border: 1px solid #e5e7eb; }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 7px 24px rgba(0,0,0,0.11); transition: all .2s; }
+  .card-o { border-top: 4px solid var(--orange); }
+  .card-b { border-top: 4px solid var(--blue); }
+  .card-g { border-top: 4px solid var(--green); }
+  .card-y { border-top: 4px solid var(--yellow); }
+  .card-n { border-top: 4px solid var(--mid); }
+  .ci { font-size: 28px; margin-bottom: 12px; }
+  .ct { font-size: 15px; font-weight: 800; color: var(--dark); margin-bottom: 7px; }
+  .cb { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+  /* DARK CARDS */
+  .dcard { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 24px; }
+  .dcard .ct { color: #fff; }
+  .dcard .cb { color: rgba(255,255,255,0.65); }
+
+  /* STAGE BAR */
+  .stage-bar { display: flex; width: 100%; max-width: 1000px; gap: 0; margin-bottom: 36px; }
+  .stage { flex: 1; text-align: center; padding: 11px 5px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; position: relative; }
+  .stage::after { content: ''; position: absolute; right: -8px; top: 50%; transform: translateY(-50%); border-left: 8px solid transparent; border-right: 0; border-top: 8px solid transparent; border-bottom: 8px solid transparent; z-index: 2; }
+  .stage:last-child::after { display: none; }
+  .st1 { background: #1d4ed8; color: #fff; border-radius: 8px 0 0 8px; }
+  .st1::after { border-left-color: #1d4ed8; }
+  .st2 { background: #2563eb; color: #fff; }
+  .st2::after { border-left-color: #2563eb; }
+  .st3 { background: var(--orange); color: #fff; }
+  .st3::after { border-left-color: var(--orange); }
+  .st4 { background: var(--green); color: #fff; border-radius: 0 8px 8px 0; }
+
+  /* FLOW */
+  .flow { display: flex; align-items: flex-start; gap: 0; width: 100%; max-width: 1060px; flex-wrap: wrap; justify-content: center; }
+  .fstep { flex: 1; min-width: 130px; max-width: 200px; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; padding: 0 6px; }
+  .fstep::after { content: '→'; position: absolute; right: -10px; top: 24px; color: var(--orange); font-size: 18px; font-weight: bold; }
+  .fstep:last-child::after { display: none; }
+  .fcircle { width: 54px; height: 54px; border-radius: 50%; background: var(--orange); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 10px; box-shadow: 0 4px 12px rgba(232,108,44,0.35); }
+  .fl { font-size: 12px; font-weight: 800; color: var(--dark); margin-bottom: 3px; }
+  .fs { font-size: 10px; color: var(--muted); }
+
+  /* TIER TABLE */
+  .ttable { width: 100%; max-width: 1000px; border-collapse: collapse; background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+  .ttable th { background: var(--dark); color: #fff; padding: 13px 16px; font-size: 12px; font-weight: 700; text-align: left; text-transform: uppercase; letter-spacing: 1px; }
+  .ttable td { padding: 14px 16px; font-size: 13px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+  .ttable tr:last-child td { border-bottom: none; }
+  .ttable tr:hover td { background: #fef9f6; }
+  .tn { font-weight: 800; color: var(--dark); font-size: 14px; }
+  .tbadge { display: inline-block; padding: 3px 9px; border-radius: 20px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+  .b1 { background: #dbeafe; color: #1d4ed8; }
+  .b2 { background: #d1fae5; color: #065f46; }
+  .b3 { background: #fef3c7; color: #92400e; }
+
+  /* ALERTS */
+  .alert { display: flex; align-items: flex-start; gap: 11px; padding: 14px 18px; border-radius: 10px; margin-bottom: 10px; font-size: 13px; width: 100%; max-width: 940px; }
+  .aw { background: #fffbeb; border: 1px solid #fcd34d; color: #92400e; }
+  .ai { background: #eff6ff; border: 1px solid #93c5fd; color: #1e40af; }
+  .as { background: #ecfdf5; border: 1px solid #6ee7b7; color: #065f46; }
+  .ar { background: #fef2f2; border: 1px solid #fca5a5; color: #991b1b; }
+  .aico { font-size: 16px; flex-shrink: 0; }
+  .alert b { display: block; margin-bottom: 2px; }
+
+  /* WARN BOX */
+  .warn-box { background: #fffbeb; border: 1px solid #fcd34d; border-left: 4px solid #f59e0b; border-radius: 0 10px 10px 0; padding: 12px 16px; font-size: 12px; color: #78350f; line-height: 1.65; width: 100%; max-width: 940px; margin-bottom: 10px; }
+
+  /* COLLAPSIBLE SECTIONS */
+  details { width: 100%; max-width: 1000px; margin-bottom: 12px; }
+  summary { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px 20px; cursor: pointer; list-style: none; font-weight: 700; color: var(--dark); display: flex; align-items: center; gap: 10px; transition: all .2s; }
+  summary:hover { background: #fafbfd; }
+  summary::-webkit-details-marker { display: none; }
+  summary::before { content: '▶'; color: var(--orange); font-size: 12px; transition: transform .2s; }
+  details[open] summary::before { transform: rotate(90deg); }
+  .detail-body { background: #fafbfd; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 10px 10px; padding: 18px 20px; font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+  /* PHASE SWIMLANE */
+  .phase-row { display: flex; gap: 12px; width: 100%; max-width: 1060px; margin-bottom: 10px; flex-wrap: wrap; }
+  .phase-col { flex: 1; min-width: 180px; background: #fff; border-radius: 12px; padding: 18px; border: 1px solid #e5e7eb; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .phase-col-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 2px solid var(--orange); color: var(--dark); }
+  .phase-item { font-size: 12px; color: var(--muted); padding: 5px 0; border-bottom: 1px dashed #f0f0f0; line-height: 1.5; }
+  .phase-item:last-child { border-bottom: none; }
+  .phase-item strong { color: var(--dark); }
+  .phase-item a { color: #1a56b0; text-decoration: none; font-weight: 600; }
+  .phase-item a:hover { text-decoration: underline; }
+
+  /* LAUNCH PLAN SLIDES */
+  .lp-slide { background: #fff; border-radius: 12px; border: 1.5px solid #e5e7eb; padding: 16px 20px; margin-bottom: 8px; display: flex; align-items: center; gap: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .lp-num { width: 32px; height: 32px; min-width: 32px; background: var(--dark); color: #fff; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 13px; }
+  .lp-name { font-weight: 700; font-size: 13px; color: var(--dark); }
+  .lp-src { font-size: 11px; color: var(--muted); }
+  .lp-badge { margin-left: auto; font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 20px; white-space: nowrap; }
+  .lp-static { background: #f3f4f6; color: #374151; }
+  .lp-gen { background: rgba(232,108,44,0.1); color: var(--orange); }
+
+  /* ROLE BADGES */
+  .rbg { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; white-space: nowrap; margin-right: 4px; }
+  .r-sales   { background: #e8f0fe; color: #1a56b0; }
+  .r-am      { background: #e6f4ea; color: #1e7e34; }
+  .r-traffic { background: #fce8b2; color: #8a5700; }
+  .r-creative{ background: #f3e8fd; color: #6a1b9a; }
+  .r-seo     { background: #e0f7fa; color: #00696f; }
+  .r-vendor  { background: #f1f3f4; color: #444; }
+  .r-hs      { background: #fff0e6; color: #b34700; }
+  .r-team    { background: #e8eaf6; color: #283593; }
+  .r-svc     { background: #fce7f3; color: #9d174d; }
+  .r-all     { background: #1e3a5f; color: #fff; }
+
+  /* ROLES TABLE */
+  .roles-table { width: 100%; max-width: 1000px; border-collapse: collapse; background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 24px; }
+  .roles-table th { background: var(--dark); color: #fff; padding: 13px 16px; font-size: 12px; font-weight: 700; text-align: left; text-transform: uppercase; letter-spacing: 1px; }
+  .roles-table td { padding: 14px 16px; font-size: 13px; border-bottom: 1px solid #f0f0f0; vertical-align: top; line-height: 1.6; }
+  .roles-table tr:last-child td { border-bottom: none; }
+  .roles-table tr:hover td { background: #fafbfd; }
+
+  /* BUTTONS */
+  .btn-row { display: flex; gap: 12px; margin-top: 36px; flex-wrap: wrap; justify-content: center; }
+  .btn { padding: 12px 28px; border-radius: 50px; font-size: 14px; font-weight: 700; cursor: pointer; border: none; transition: all .2s; letter-spacing: 0.3px; }
+  .btn-p { background: var(--orange); color: #fff; }
+  .btn-p:hover { background: #c2540a; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(232,108,44,0.38); }
+  .btn-ghost { background: transparent; color: rgba(255,255,255,0.75); border: 2px solid rgba(255,255,255,0.28); }
+  .btn-ghost:hover { background: rgba(255,255,255,0.08); color: #fff; }
+  .btn-ghost-dark { background: transparent; color: #aaa; border: 2px solid #ddd; }
+  .btn-ghost-dark:hover { background: #f5f5f5; color: #444; }
+
+  /* FOOTER */
+  .sfooter { position: absolute; bottom: 18px; left: 36px; right: 36px; display: flex; align-items: center; justify-content: space-between; font-size: 10px; color: rgba(255,255,255,0.3); }
+  .sfooter-dark { color: var(--muted); }
+  .flogo { font-weight: 800; font-size: 12px; color: var(--orange); }
+
+  @media(max-width:700px){
+    .flow { gap: 16px; }
+    .fstep { min-width: 90px; }
+    .fstep::after { display: none; }
+    .stage-bar { flex-direction: column; gap: 3px; }
+    .stage { border-radius: 8px !important; }
+    .stage::after { display: none; }
+    nav { padding: 9px 14px; }
+    .slide { padding: 48px 16px 36px; }
+    .resource-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">SEO<span>+</span>GEO · <span style="font-size:12px;color:rgba(255,255,255,0.35);font-weight:400">2026 Training</span></div>
+  <div class="nav-center">
+    <button class="nav-templates-btn" onclick="toggleTemplates()">📚 Templates & Resources</button>
+    <div style="display:flex;align-items:center;gap:14px;">
+      <div class="nav-progress" id="navDots"></div>
+      <div class="slide-counter" id="slideCounter">1 / 12</div>
+    </div>
+  </div>
+</nav>
+
+<!-- TEMPLATES MODAL -->
+<div class="templates-modal" id="templatesModal">
+  <div class="templates-content">
+    <div class="templates-header">
+      <div class="templates-title">📚 Templates & Resources</div>
+      <div class="templates-close" onclick="toggleTemplates()">×</div>
+    </div>
+    <div class="templates-body">
+      
+      <div class="resource-section" style="margin-bottom:32px;">
+        <div class="resource-label" style="color:var(--dark);">Systems</div>
+        <div class="resource-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+          <a href="#" class="resource-tile" style="background:#f0f4fa;border-color:#d0daea;">
+            <div class="resource-icon">💬</div>
+            <div class="resource-text">
+              <div class="resource-name" style="color:var(--dark);">Slack Channel</div>
+              <div class="resource-desc" style="color:var(--muted);">#seo-geo-delivery (link TBD)</div>
+            </div>
+          </a>
+          <a href="https://app.asana.com/0/portfolio/1210853293261707/1210861679035442" target="_blank" class="resource-tile" style="background:#f0f4fa;border-color:#d0daea;">
+            <div class="resource-icon">✅</div>
+            <div class="resource-text">
+              <div class="resource-name" style="color:var(--dark);">Asana Project Board</div>
+              <div class="resource-desc" style="color:var(--muted);">Project management</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <details open style="margin-bottom:20px;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;">
+        <summary style="background:#fafbfd;padding:14px 18px;cursor:pointer;font-weight:700;color:var(--dark);font-size:14px;list-style:none;display:flex;align-items:center;gap:8px;">
+          <span style="color:var(--orange);">▼</span> Sales & Pitch Templates
+        </summary>
+        <div style="padding:16px;background:#fff;">
+          <div class="resource-grid">
+            <a href="https://docs.google.com/presentation/d/1PQ3fZdp2zRWrbdFmyHK_5rIN03CqMDEl/edit" target="_blank" class="resource-tile" style="background:#f0f4fa;border-color:#d0daea;">
+              <div class="resource-icon">📊</div>
+              <div class="resource-text">
+                <div class="resource-name" style="color:var(--dark);">Pitch Deck</div>
+                <div class="resource-desc" style="color:var(--muted);">Sales presentation</div>
+              </div>
+            </a>
+            <a href="https://drive.google.com/file/d/1gm2_wL1ygSDqXbWDDihKTsC1c9ePygdp/view" target="_blank" class="resource-tile" style="background:#f0f4fa;border-color:#d0daea;">
+              <div class="resource-icon">💰</div>
+              <div class="resource-text">
+                <div class="resource-name" style="color:var(--dark);">Packages & Pricing</div>
+                <div class="resource-desc" style="color:var(--muted);">Product tiers</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </details>
+
+      <details open style="margin-bottom:20px;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;">
+        <summary style="background:#fafbfd;padding:14px 18px;cursor:pointer;font-weight:700;color:var(--dark);font-size:14px;list-style:none;display:flex;align-items:center;gap:8px;">
+          <span style="color:var(--orange);">▼</span> Launch & Kickoff
+        </summary>
+        <div style="padding:16px;background:#fff;">
+          <div class="resource-grid">
+            <a href="https://docs.google.com/presentation/d/1ljqUDFGlHDwtt6VRv5w-9R-Gf1YUU1B_/edit" target="_blank" class="resource-tile" style="background:#f0f4fa;border-color:#d0daea;">
+              <div class="resource-icon">🚀</div>
+              <div class="resource-text">
+                <div class="resource-name" style="color:var(--dark);">Launch Plan Template</div>
+                <div class="resource-desc" style="color:var(--muted);">Client kickoff deck</div>
+              </div>
+            </a>
+            <a href="https://docs.google.com/spreadsheets/d/1z4y1rm4U0DQmFTtKM6NAW81N5kL4EtXLvuFXrT3nsg4/edit" target="_blank" class="resource-tile" style="background:#f0f4fa;border-color:#d0daea;">
+              <div class="resource-icon">📋</div>
+              <div class="resource-text">
+                <div class="resource-name" style="color:var(--dark);">Delivery Plan</div>
+                <div class="resource-desc" style="color:var(--muted);">Task tracking</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </details>
+
+      <details open style="margin-bottom:20px;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;">
+        <summary style="background:#fafbfd;padding:14px 18px;cursor:pointer;font-weight:700;color:var(--dark);font-size:14px;list-style:none;display:flex;align-items:center;gap:8px;">
+          <span style="color:var(--orange);">▼</span> Technical & Analysis
+        </summary>
+        <div style="padding:16px;background:#fff;">
+          <div class="resource-grid">
+            <a href="https://docs.google.com/document/d/13Wb9BLDyRJ0Uy_kBc4N8BNpfqx1nyC22F553JyVz74c/edit" target="_blank" class="resource-tile" style="background:#f0f4fa;border-color:#d0daea;">
+              <div class="resource-icon">🔧</div>
+              <div class="resource-text">
+                <div class="resource-name" style="color:var(--dark);">Technical Audit Doc</div>
+                <div class="resource-desc" style="color:var(--muted);">Crawlability assessment</div>
+              </div>
+            </a>
+            <a href="https://drive.google.com/file/d/1uuKB7pJjTYZoxk4yL7T11JQ0W4AC4ku7/view" target="_blank" class="resource-tile" style="background:#f0f4fa;border-color:#d0daea;">
+              <div class="resource-icon">📈</div>
+              <div class="resource-text">
+                <div class="resource-name" style="color:var(--dark);">SEMrush Report</div>
+                <div class="resource-desc" style="color:var(--muted);">Keyword analysis</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </details>
+
+      <details open style="margin-bottom:20px;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;">
+        <summary style="background:#fafbfd;padding:14px 18px;cursor:pointer;font-weight:700;color:var(--dark);font-size:14px;list-style:none;display:flex;align-items:center;gap:8px;">
+          <span style="color:var(--orange);">▼</span> Content & GEO
+        </summary>
+        <div style="padding:16px;background:#fff;">
+          <div class="resource-grid">
+            <a href="https://docs.google.com/document/d/1ISj6vtcregi5iNuEFmDxSL_4Y7g_uQvr4Bv4i74-4_I/edit" target="_blank" class="resource-tile" style="background:#f0f4fa;border-color:#d0daea;">
+              <div class="resource-icon">📝</div>
+              <div class="resource-text">
+                <div class="resource-name" style="color:var(--dark);">AEO Content Example</div>
+                <div class="resource-desc" style="color:var(--muted);">Content template</div>
+              </div>
+            </a>
+            <a href="https://drive.google.com/file/d/1FNa1yp7GFKqEunlR6DsBdQ_kYB8gcVIf/view" target="_blank" class="resource-tile" style="background:#f0f4fa;border-color:#d0daea;">
+              <div class="resource-icon">🤖</div>
+              <div class="resource-text">
+                <div class="resource-name" style="color:var(--dark);">AI Reports</div>
+                <div class="resource-desc" style="color:var(--muted);">GEO analysis</div>
+              </div>
+            </a>
+            <a href="https://docs.google.com/document/d/1TmMxBJhTa_NuoRbi4s9WuShk7J3_APcghWiBFcLGTVY/edit" target="_blank" class="resource-tile" style="background:#f0f4fa;border-color:#d0daea;">
+              <div class="resource-icon">📅</div>
+              <div class="resource-text">
+                <div class="resource-name" style="color:var(--dark);">Content Calendar</div>
+                <div class="resource-desc" style="color:var(--muted);">12-month plan</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </details>
+
+      <details open style="margin-bottom:20px;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;">
+        <summary style="background:#fafbfd;padding:14px 18px;cursor:pointer;font-weight:700;color:var(--dark);font-size:14px;list-style:none;display:flex;align-items:center;gap:8px;">
+          <span style="color:var(--orange);">▼</span> Entity & Optimization
+        </summary>
+        <div style="padding:16px;background:#fff;">
+          <div class="resource-grid">
+            <a href="https://docs.google.com/document/d/1q4gUmHn7A3D-RUWLVgOglKbb4qx8PJlRk1QLy1G-93I/edit" target="_blank" class="resource-tile" style="background:#f0f4fa;border-color:#d0daea;">
+              <div class="resource-icon">🗺️</div>
+              <div class="resource-text">
+                <div class="resource-name" style="color:var(--dark);">Entity Optimization</div>
+                <div class="resource-desc" style="color:var(--muted);">Entity mapping</div>
+              </div>
+            </a>
+            <a href="https://docs.google.com/document/d/1dcU8biWDTD7Rhkg66MkP81WDfR2k-8rR45OBdGGdy2E/edit" target="_blank" class="resource-tile" style="background:#f0f4fa;border-color:#d0daea;">
+              <div class="resource-icon">🏷️</div>
+              <div class="resource-text">
+                <div class="resource-name" style="color:var(--dark);">NER & Naming</div>
+                <div class="resource-desc" style="color:var(--muted);">Entity recognition</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </details>
+
+      <details open style="border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;">
+        <summary style="background:#fafbfd;padding:14px 18px;cursor:pointer;font-weight:700;color:var(--dark);font-size:14px;list-style:none;display:flex;align-items:center;gap:8px;">
+          <span style="color:var(--orange);">▼</span> Reporting & Dashboards
+        </summary>
+        <div style="padding:16px;background:#fff;">
+          <div class="resource-grid">
+            <a href="https://drive.google.com/open?id=1H6xckWnoT0d-ZYHR_b9qOorVXCWMScH2" target="_blank" class="resource-tile" style="background:#f0f4fa;border-color:#d0daea;">
+              <div class="resource-icon">📊</div>
+              <div class="resource-text">
+                <div class="resource-name" style="color:var(--dark);">Dashboard View</div>
+                <div class="resource-desc" style="color:var(--muted);">10-metric tracking</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </details>
+
+    </div>
+  </div>
+</div>
+
+<div class="deck">
+
+<!-- ═══════════════════════════════════
+     SLIDE 1 — COVER
+═══════════════════════════════════ -->
+<div class="slide slide-cover active" id="slide-1">
+  <div class="bg-num">01</div>
+  <div class="cover-badge">Orange 142 · 2026 Process</div>
+  <h1 class="cover-title">SEO + GEO<br><span class="hi">E2E Training</span></h1>
+  <p class="cover-sub">The 2026 process to support lead generation, sales, and fulfillment of our new combined product line: the integrated value of GEO with SEO.</p>
+  
+  <div style="max-width:500px;margin-bottom:24px;">
+    <div class="alert ai" style="margin:0;">
+      <span class="aico">📚</span>
+      <div><b>All Templates & Resources Available:</b> Click the "Templates & Resources" button in the top navigation to access all documents, templates, and system links throughout this training.</div>
+    </div>
+  </div>
+
+  <div class="sfooter">
+    <div class="flogo">ORANGE 142 · DDH</div>
+    <div>CONFIDENTIAL — INTERNAL USE ONLY</div>
+  </div>
+  <div class="btn-row"><a href="#slide-2" class="btn btn-p" onclick="goTo(2); return false;">Begin Training →</a></div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SLIDE 2 — THE 4-PHASE OVERVIEW
+═══════════════════════════════════ -->
+<div class="slide slide-dark" id="slide-2">
+  <div class="bg-num">02</div>
+  <div class="sec-label">Overview</div>
+  <h2 class="sec-title">The 4-Phase<br>E2E Process</h2>
+  <p class="sec-desc">Every SEO+GEO engagement follows this path. Sales owns Phase 1. Delivery Solutions owns Phases 2–4. Understanding the full journey makes you a better partner to your client and ensures seamless handoffs.</p>
+  <div class="stage-bar">
+    <div class="stage st1">Phase 1<br><span style="font-weight:400;font-size:9px;">Sales</span></div>
+    <div class="stage st2">Phase 2<br><span style="font-weight:400;font-size:9px;">Onboarding</span></div>
+    <div class="stage st3">Phase 3<br><span style="font-weight:400;font-size:9px;">Kickoff & Launch</span></div>
+    <div class="stage st4">Phase 4<br><span style="font-weight:400;font-size:9px;">Delivery & Support</span></div>
+  </div>
+  <div class="g2" style="gap:14px;">
+    <div class="dcard">
+      <div class="ci">🎯</div>
+      <div class="ct">Phase 1: Sales</div>
+      <div class="cb">Prospect qualification, site analysis, pitch deck delivery, tier selection, DealHub quote, and contract close. Setup fee collected before any handoff.</div>
+    </div>
+    <div class="dcard">
+      <div class="ci">📋</div>
+      <div class="ct">Phase 2: Onboarding</div>
+      <div class="cb">Signed SOW triggers Asana project creation, ILID assignment, vendor assignment, and client access request. Onboarding complete when all credentials received.</div>
+    </div>
+    <div class="dcard">
+      <div class="ci">🚀</div>
+      <div class="ct">Phase 3: Kickoff & Launch</div>
+      <div class="cb">Internal delivery planning across technical audit, content strategy, entity mapping, and GEO execution. Culminates in Launch Plan presentation to client.</div>
+    </div>
+    <div class="dcard">
+      <div class="ci">📊</div>
+      <div class="ct">Phase 4: Delivery & Support</div>
+      <div class="cb">Monthly content production, technical optimization, keyword tracking, AI platform optimization, and performance reporting against agreed KPIs.</div>
+    </div>
+  </div>
+  <div class="sfooter"><div class="flogo">ORANGE 142</div><div>2 / 11</div></div>
+  <div class="btn-row">
+    <a href="#slide-1" class="btn btn-ghost" onclick="goTo(1); return false;">← Back</a>
+    <a href="#slide-3" class="btn btn-p" onclick="goTo(3); return false;">Phase 1: Sales →</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SLIDE 3 — PHASE 1: PROSPECT + PIPELINE
+═══════════════════════════════════ -->
+<div class="slide slide-white" id="slide-3">
+  <div class="cw">
+    <div class="slide-hdr">
+      <div class="s-tag">Phase 1 · Sales / BDR / AM</div>
+      <h2 class="s-title">Prospect Identification + Sales Process</h2>
+      <p class="s-sub">There are three new products that meet the needs of the majority of our clients. This first phase is determining the right fit.</p>
+    </div>
+
+    <div class="flow" style="margin-bottom:28px;">
+      <div class="fstep"><div class="fcircle">🎯</div><div class="fl">Identify Prospect</div><div class="fs">Qualify opportunity</div></div>
+      <div class="fstep"><div class="fcircle">🔬</div><div class="fl">Run Site Analyzer</div><div class="fs">Gather market data</div></div>
+      <div class="fstep"><div class="fcircle">📊</div><div class="fl">Review vs Products</div><div class="fs">Match to tier</div></div>
+      <div class="fstep"><div class="fcircle">🎬</div><div class="fl">Complete Sales Pitch</div><div class="fs">Present & close</div></div>
+    </div>
+
+    <div class="g2">
+      <div class="card card-n">
+        <div class="ci">📋</div>
+        <div class="ct">General Template Information</div>
+        <div class="cb">
+          <strong>Slides 1–10: The Market Story</strong><br><br>
+          Static master content explaining what SEO/GEO is, why it matters in 2026, and the Orange 142 framework. Includes goal overview, supporting deliverables, and tier comparison.<br><br>
+          <em style="color:var(--blue);">✓ Educates on the combined value proposition of traditional search + AI-powered discovery</em>
+        </div>
+      </div>
+      <div class="card card-o">
+        <div class="ci">🎯</div>
+        <div class="ct">Personalized Information from Site Analyzer</div>
+        <div class="cb">
+          <strong>Slides 11–15: Their Specific Situation</strong><br><br>
+          Generated from site analyzer: baseline metrics, SEO/GEO readiness scores, competitor traffic comparison, unified priority matrix, and tier recommendation with 90-day actions.<br><br>
+          <em style="color:var(--orange);">✓ Data-driven insights that differentiate Orange 142 from standard SEO pitches</em>
+        </div>
+      </div>
+    </div>
+
+    <div class="warn-box" style="margin:24px auto 0;">
+      ⚠️ <strong>CMS determines the entire delivery path.</strong> WordPress supports a standard delivery process through Vendasta. Non-standard CMSs (e.g., Simpleview, custom platforms) are complex and require a custom delivery track. <strong>Identify and flag the client's CMS early</strong> so Delivery can engage the right resourcing from day one.
+    </div>
+  </div>
+  <div class="btn-row">
+    <a href="#slide-2" class="btn btn-ghost-dark" onclick="goTo(2); return false;">← Back</a>
+    <a href="#slide-4" class="btn btn-p" onclick="goTo(4); return false;">The Pitch Deck →</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SLIDE 4 — THE PITCH DECK
+═══════════════════════════════════ -->
+<div class="slide slide-gray" id="slide-4">
+  <div class="cw">
+    <div class="slide-hdr">
+      <div class="s-tag">Phase 1 · Sales</div>
+      <h2 class="s-title">Your 15-Slide Pitch Deck</h2>
+      <p class="s-sub">Know your deck cold. Every slide has a job. Master these two components to close with confidence.</p>
+      <div class="links-row">
+        <a class="link-btn" href="https://docs.google.com/presentation/d/1PQ3fZdp2zRWrbdFmyHK_5rIN03CqMDEl/edit" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/></svg>
+          Pitch Deck Template
+        </a>
+        <a class="link-btn" href="https://drive.google.com/file/d/1nLMxdsHupxiFLR29hXIoaHvTV1KyaTQu/view" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Pitch Deck Guide
+        </a>
+      </div>
+    </div>
+
+    <details style="margin-bottom:12px;">
+      <summary>📌 Slides 1–10: The Market Story (Static Template)</summary>
+      <div class="detail-body">
+        <strong>What it covers:</strong><br>
+        • Slide 1 — Project kickoff title (auto-personalizes with prospect name, scores, logo)<br>
+        • Slide 2 — Goal & supporting deliverables overview<br>
+        • Slides 3–6 — Why SEO + GEO + AEO matter in 2026<br>
+        • Slides 7–8 — Orange 142 intro & framework<br>
+        • Slide 9 — Summary of key initiatives (5-category overview)<br>
+        • Slide 10 — Good / Better / Best tier overview<br><br>
+        <strong>Why it matters:</strong> Establishes credibility and educates prospects on the integrated value of traditional search optimization combined with AI-powered discovery. This is your foundation for demonstrating thought leadership before showing their specific data.
+      </div>
+    </details>
+
+    <details style="margin-bottom:12px;">
+      <summary>🔍 Slides 11–15: Their Specific Situation (Generated)</summary>
+      <div class="detail-body">
+        <strong>What it covers:</strong><br>
+        • Slide 11 — Baseline metrics (SEO readiness X/160, GEO readiness X/160)<br>
+        • Slide 12 — SEO + GEO radar charts (5 dimensions each)<br>
+        • Slide 13 — Competitor traffic comparison + source breakdown<br>
+        • Slide 14 — Top priorities / unified priority matrix with impact scores<br>
+        • Slide 15 — Tier recommendation + 90-day actions + booking link<br><br>
+        <strong>Why it matters:</strong> Personalized data transforms the conversation from theoretical to tactical. Showing their specific gaps, competitor performance, and ranked action items with point impact makes the value proposition concrete and defensible. This is what closes deals.
+      </div>
+    </details>
+
+    <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:20px;">
+      <div class="alert ai" style="flex:1;margin:0;">
+        <span class="aico">🏢</span>
+        <div><b>For CMO / Marketing Directors:</b> Lead with Slides 11–13. Competitor traffic decline and keyword gaps close deals faster than feature lists.</div>
+      </div>
+      <div class="alert aw" style="flex:1;margin:0;">
+        <span class="aico">💰</span>
+        <div><b>For CEOs / Budget Holders:</b> Jump to Slides 14–15. The priority matrix with impact scores + clear ROI framing moves the close.</div>
+      </div>
+      <div class="alert as" style="flex:1;margin:0;">
+        <span class="aico">🤖</span>
+        <div><b>For Digital-Savvy Buyers:</b> Lean into Slide 12's dual radar charts. Showing SEO vs. GEO readiness visually separates us from standard SEO vendors.</div>
+      </div>
+    </div>
+  </div>
+  <div class="btn-row">
+    <a href="#slide-3" class="btn btn-ghost-dark" onclick="goTo(3); return false;">← Back</a>
+    <a href="#slide-5" class="btn btn-p" onclick="goTo(5); return false;">Packages & Pricing →</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SLIDE 5 — PACKAGES + PRICING
+═══════════════════════════════════ -->
+<div class="slide slide-white" id="slide-5">
+  <div class="cw">
+    <div class="slide-hdr">
+      <div class="s-tag">Phase 1 · Sales + DealHub</div>
+      <h2 class="s-title">Digital Visibility Packages & Pricing</h2>
+      <p class="s-sub">Three named packages. Non-negotiable floors. DealHub enforces the rules — know them before you quote anything.</p>
+    </div>
+
+    <table class="ttable" style="margin-bottom:24px;">
+      <thead>
+        <tr>
+          <th>Package Name</th>
+          <th>Best For</th>
+          <th>Term</th>
+          <th>Monthly Price</th>
+          <th>Setup Fee</th>
+          <th>Content</th>
+          <th>AI Optimization</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="tn">SEO: The Basics</div><span class="tbadge b1">Good</span></td>
+          <td style="font-size:12px;color:var(--muted);">Small / early-stage, building SEO foundation from scratch</td>
+          <td style="font-weight:700;">6 months</td>
+          <td style="font-weight:800;color:var(--dark);font-size:16px;">$1,650</td>
+          <td style="font-weight:700;">$1,000</td>
+          <td style="font-size:12px;">700 words/mo · 1 article</td>
+          <td style="font-size:12px;color:var(--muted);">Not included</td>
+        </tr>
+        <tr>
+          <td><div class="tn">SEO + GEO: Scaling</div><span class="tbadge b2">Better · Most Popular</span></td>
+          <td style="font-size:12px;color:var(--muted);">Mid-market, ready to capture AI-driven discovery</td>
+          <td style="font-weight:700;">12 months</td>
+          <td style="font-weight:800;color:var(--dark);font-size:16px;">$3,100</td>
+          <td style="font-weight:700;">$1,500</td>
+          <td style="font-size:12px;">1,400 words/mo · 2 articles</td>
+          <td style="font-size:12px;">Single-platform AI optimizer + Entity Mapping</td>
+        </tr>
+        <tr>
+          <td><div class="tn">SEO + GEO + AEO</div><span class="tbadge b3">Best</span></td>
+          <td style="font-size:12px;color:var(--muted);">Market leaders needing full AI share-of-voice domination</td>
+          <td style="font-weight:700;">12 months</td>
+          <td style="font-weight:800;color:var(--dark);font-size:16px;">$4,350</td>
+          <td style="font-weight:700;">$2,000</td>
+          <td style="font-size:12px;">2,800 words/mo · 4 articles</td>
+          <td style="font-size:12px;">Multi-platform: ChatGPT, Perplexity, Google AIO, Copilot</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <details style="margin-bottom:10px;">
+      <summary>📦 Package Naming Rules</summary>
+      <div class="detail-body">
+        In DealHub, quotes must use the official product line names exactly as shown above. Do not create custom line items or rename packages when quoting. This ensures pricing consistency and proper commission tracking.
+      </div>
+    </details>
+
+    <details style="margin-bottom:10px;">
+      <summary>📞 Enterprise / Complex Account Escalation</summary>
+      <div class="detail-body">
+        If a prospect has a non-standard CMS (Simpleview, custom-built platforms) or requires 30+ hrs/month of custom work, do not quote it yourself. Flag to Christy / Delivery Solutions VP before the pitch. Large enterprise accounts are a separate defined engagement with their own delivery track.
+      </div>
+    </details>
+
+    <details>
+      <summary>✅ Add-On: GBP Setup</summary>
+      <div class="detail-body">
+        New Google Business Profile setup (if the client doesn't have one) is available for an additional <strong>$800</strong> — not included in any package. Surface this during the pitch for new businesses or clients without an existing GBP presence.
+      </div>
+    </details>
+  </div>
+  <div class="btn-row">
+    <a href="#slide-4" class="btn btn-ghost-dark" onclick="goTo(4); return false;">← Back</a>
+    <a href="#slide-6" class="btn btn-p" onclick="goTo(6); return false;">Phase 2: Onboarding →</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SLIDE 6 — PHASE 2: ONBOARDING
+═══════════════════════════════════ -->
+<div class="slide slide-teal" id="slide-6">
+  <div class="bg-num">06</div>
+  <div class="sec-label" style="color:rgba(255,255,255,0.55);">Phase 2</div>
+  <h2 class="sec-title">Client Onboarding:<br>It's All About ACCESS</h2>
+  <p class="sec-desc">From signed contract to ready-to-launch. The single most critical factor in this phase: securing complete access to all client systems and platforms.</p>
+
+  <div class="alert aw" style="max-width:900px;margin:0 auto 32px;background:#fff;border:2px solid #f59e0b;">
+    <span class="aico" style="font-size:24px;">🔑</span>
+    <div style="font-size:15px;"><b style="font-size:16px;">NEW PROCESS — Orange Email Access Management</b><br>Each client receives a dedicated Orange 142 email address (e.g., <strong>clientname@orange142.com</strong>) that serves as the master access point for all SEO/GEO tools and platforms. This single username allows clients to grant us access to everything—GA4, GSC, CMS, hosting, GBP, and more—while we work through vendor assignment and technical validation in parallel.</div>
+  </div>
+
+  <div class="g3">
+    <div class="dcard">
+      <div class="ci">✍️</div>
+      <div class="ct">Deal Won → Project Created</div>
+      <div class="cb">Signed SOW + setup fee collected triggers Asana project creation, ILID assignment, and Slack notification to the team. Internal GDrive repo established.</div>
+    </div>
+    <div class="dcard">
+      <div class="ci">📧</div>
+      <div class="ct">Orange Email Provisioned</div>
+      <div class="cb">Orange 142 email created for the client (e.g., <strong>clientname@orange142.com</strong>). This becomes the single access point for all platforms—no more chasing multiple logins.</div>
+    </div>
+    <div class="dcard">
+      <div class="ci">📨</div>
+      <div class="ct">Onboarding Email Sent</div>
+      <div class="cb">Sent within 5 days via <strong>seo-geo@orange142.com</strong>. Instructs client to grant access using the Orange email. Access is a gating item — work cannot begin without it.</div>
+    </div>
+    <div class="dcard">
+      <div class="ci">🔧</div>
+      <div class="ct">Vendor Assignment (In Parallel)</div>
+      <div class="cb">While access is being granted, vendor assignment begins. Standard WordPress accounts → Vendasta. Enterprise/complex CMS → external SEO specialist. Vendor validates CMS and technical feasibility once access is confirmed.</div>
+    </div>
+    <div class="dcard">
+      <div class="ci">🔑</div>
+      <div class="ct">Access Received & Validated</div>
+      <div class="cb">All credentials must be received <strong>2 weeks prior to project start date</strong>. Account Manager confirms access in Asana. Vendor performs initial technical investigation to identify blockers or unknowns.</div>
+    </div>
+    <div class="dcard">
+      <div class="ci">📅</div>
+      <div class="ct">Kickoff Meeting Scheduled</div>
+      <div class="cb">30-minute introductory call to set expectations for the first month, confirm content priorities, and ensure all inputs are ready for the Launch Plan phase.</div>
+    </div>
+    <div class="dcard">
+      <div class="ci">✅</div>
+      <div class="ct">Onboarding Complete</div>
+      <div class="cb">Trigger for Phase 3: All access granted, vendor confirmed, kickoff meeting complete, and internal team mobilized for Launch Plan development.</div>
+    </div>
+  </div>
+
+  <div style="max-width:900px;margin:32px auto 0;">
+    <div class="warn-box" style="background:#fff;border-color:#0f766e;border-left-color:#0f766e;">
+      ⚙️ <strong>Why the Orange Email Process Works:</strong> The single Orange 142 email allows us to immediately begin access setup without waiting for vendor assignment decisions. Clients grant permissions once, to one email, while we simultaneously determine the right delivery team and investigate technical requirements. This eliminates the old bottleneck where access requests stalled until vendor selection was finalized.
+    </div>
+  </div>
+
+  <div class="sfooter" style="color:rgba(255,255,255,0.45);"><div class="flogo" style="color:#fff;">ORANGE 142</div><div>6 / 11</div></div>
+  <div class="btn-row">
+    <a href="#slide-5" class="btn btn-ghost" onclick="goTo(5); return false;">← Back</a>
+    <a href="#slide-7" class="btn btn-p" style="background:#fff;color:#0f766e;" onclick="goTo(7); return false;">Phase 3: Kickoff & Launch →</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SLIDE 7 — KICKOFF DECK
+═══════════════════════════════════ -->
+<div class="slide slide-gray" id="slide-7">
+  <div class="cw">
+    <div class="slide-hdr">
+      <div class="s-tag">Phase 2 · Client-Facing</div>
+      <h2 class="s-title">The Kickoff Meeting</h2>
+      <p class="s-sub">A 30-minute session to set expectations, confirm priorities, and ensure alignment before Launch Plan development begins.</p>
+    </div>
+
+    <div class="g2" style="margin-bottom:20px;">
+      <div class="card card-b">
+        <div class="ci">🎯</div>
+        <div class="ct">Meeting Objectives</div>
+        <div class="cb">
+          • Set expectations for the first month of work<br>
+          • Confirm content priorities and business goals<br>
+          • Review technical requirements and access<br>
+          • Identify key competitors and events<br>
+          • Establish communication cadence and reporting preferences
+        </div>
+      </div>
+      <div class="card card-o">
+        <div class="ci">📋</div>
+        <div class="ct">Key Deliverables from Client</div>
+        <div class="cb">
+          • Top 3–5 content priorities for first 90 days<br>
+          • Competitor list and any known market shifts<br>
+          • Upcoming events, promotions, or seasonal priorities<br>
+          • Brand guidelines, tone preferences, and any content restrictions<br>
+          • Confirmation of all access credentials
+        </div>
+      </div>
+    </div>
+
+    <div class="alert ai" style="margin:0 auto;">
+      <span class="aico">💡</span>
+      <div><b>Mostly Templatized:</b> This meeting follows a standard agenda to ensure consistency across all engagements. The Account Manager leads, supported by the Services Lead. Focus is on gathering inputs that feed the Launch Plan, not delivering strategy (that comes in Phase 3).</div>
+    </div>
+  </div>
+  <div class="btn-row">
+    <a href="#slide-6" class="btn btn-ghost-dark" onclick="goTo(6); return false;">← Back</a>
+    <a href="#slide-8" class="btn btn-p" onclick="goTo(8); return false;">Internal Delivery Plan →</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SLIDE 8 — PHASE 3: INTERNAL DELIVERY
+═══════════════════════════════════ -->
+<div class="slide slide-gray" id="slide-8">
+  <div class="cw">
+    <div class="slide-hdr">
+      <div class="s-tag">Phase 3 · Kickoff & Launch</div>
+      <h2 class="s-title">Internal Delivery Plan Work</h2>
+      <p class="s-sub">What the team does in the weeks before the Launch Plan presentation. These workstreams run in parallel to build the comprehensive plan.</p>
+    </div>
+
+    <div class="phase-row" style="margin-bottom:16px;">
+      <div class="phase-col">
+        <div class="phase-col-title">4a · Technical Audit <span class="rbg r-seo">SEO/GEO Owner</span></div>
+        <div class="phase-item"><strong>Gating step.</strong> Technical crawlability & AI fetchability audit. Must resolve before GEO execution begins. Run for all internal teams.</div>
+        <div class="phase-item"><a href="https://docs.google.com/document/d/13Wb9BLDyRJ0Uy_kBc4N8BNpfqx1nyC22F553JyVz74c/edit" target="_blank">→ Technical Audit Doc</a></div>
+      </div>
+      <div class="phase-col">
+        <div class="phase-col-title">4b · Keywords & Content <span class="rbg r-seo">SEO/GEO Owner</span></div>
+        <div class="phase-item">SEMrush baseline data. Keyword & content recommendations. CMS-dependent — WordPress vs. Simpleview have very different unknowns.</div>
+        <div class="phase-item"><a href="https://drive.google.com/file/d/1uuKB7pJjTYZoxk4yL7T11JQ0W4AC4ku7/view" target="_blank">→ SEMrush Report</a></div>
+      </div>
+      <div class="phase-col">
+        <div class="phase-col-title">4c · GEO Content <span class="rbg r-creative">Creative Owner</span></div>
+        <div class="phase-item">AEO content development (Goals Checklist, GEO Checklist, Meta/SEO Block, Schema, Internal Linking). AI Reports produced.</div>
+        <div class="phase-item"><a href="https://docs.google.com/document/d/1ISj6vtcregi5iNuEFmDxSL_4Y7g_uQvr4Bv4i74-4_I/edit" target="_blank">→ AEO Content Example</a></div>
+        <div class="phase-item"><a href="https://drive.google.com/file/d/1FNa1yp7GFKqEunlR6DsBdQ_kYB8gcVIf/view" target="_blank">→ AI Reports</a></div>
+      </div>
+    </div>
+    <div class="phase-row" style="margin-bottom:16px;">
+      <div class="phase-col">
+        <div class="phase-col-title">4d · Content Calendar <span class="rbg r-creative">Creative Owner</span></div>
+        <div class="phase-item">12-month plan for new and existing page optimization. Order negotiated in Asana ticket.</div>
+        <div class="phase-item"><a href="https://docs.google.com/document/d/1TmMxBJhTa_NuoRbi4s9WuShk7J3_APcghWiBFcLGTVY/edit" target="_blank">→ Content Calendar</a></div>
+      </div>
+      <div class="phase-col">
+        <div class="phase-col-title">4e · Entity Mapping <span class="rbg r-creative">Creative Owner</span></div>
+        <div class="phase-item">Foundational GEO step. Identifies entities, gaps, missing pages, relationships. Output: Entity Map + Gap Analysis + Entity-to-Page Mapping.</div>
+        <div class="phase-item"><a href="https://docs.google.com/document/d/1q4gUmHn7A3D-RUWLVgOglKbb4qx8PJlRk1QLy1G-93I/edit" target="_blank">→ Entity Optimization Doc</a></div>
+      </div>
+      <div class="phase-col">
+        <div class="phase-col-title">4f · Named Entity Recognition <span class="rbg r-creative">Creative Owner</span></div>
+        <div class="phase-item">Canonical naming conventions. Required for complex orgs; optional for simpler clients. NER client questionnaire sent.</div>
+        <div class="phase-item"><a href="https://docs.google.com/document/d/1dcU8biWDTD7Rhkg66MkP81WDfR2k-8rR45OBdGGdy2E/edit" target="_blank">→ NER & Naming Doc</a></div>
+      </div>
+    </div>
+    <div class="phase-row">
+      <div class="phase-col" style="flex:2;">
+        <div class="phase-col-title">4g · Assemble Delivery Plan <span class="rbg r-svc">Services Lead</span><span class="rbg r-seo">SEO/GEO Owner</span></div>
+        <div class="phase-item">Align 4a + 4b + 4c into a single plan based on product tier. Includes placeholder for technical optimization. Added to Launch Plan template.</div>
+        <div class="phase-item"><a href="https://docs.google.com/spreadsheets/d/1z4y1rm4U0DQmFTtKM6NAW81N5kL4EtXLvuFXrT3nsg4/edit" target="_blank">→ Delivery Plan Spreadsheet</a></div>
+      </div>
+      <div class="phase-col" style="flex:2;">
+        <div class="phase-col-title">4h · Internal Review <span class="rbg r-svc">Services Lead</span><span class="rbg r-all">All</span></div>
+        <div class="phase-item"><strong>No client-facing work proceeds until all team members have confirmed review end-to-end.</strong> Everyone stacks hands, confirms ownership and sequencing.</div>
+        <div class="phase-item"><a href="https://docs.google.com/presentation/d/1ljqUDFGlHDwtt6VRv5w-9R-Gf1YUU1B_/edit" target="_blank">→ Launch Plan Template</a></div>
+      </div>
+    </div>
+
+    <div class="alert aw" style="margin:16px auto 0;">
+      <span class="aico">⚠️</span>
+      <div><b>Stage Gate:</b> All team members must review and confirm every task before the Launch Plan presentation. Each stacks hands on their assigned work. All confirmed tasks load to Asana with owners, due dates, and dependencies.</div>
+    </div>
+  </div>
+  <div class="btn-row">
+    <a href="#slide-7" class="btn btn-ghost-dark" onclick="goTo(7); return false;">← Back</a>
+    <a href="#slide-9" class="btn btn-p" onclick="goTo(9); return false;">Launch Plan Presentation →</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SLIDE 9 — LAUNCH PLAN PRESENTATION
+═══════════════════════════════════ -->
+<div class="slide slide-navy" id="slide-9">
+  <div class="bg-num">09</div>
+  <div class="sec-label" style="color:rgba(255,255,255,0.5);">Phase 3 · Client Facing</div>
+  <h2 class="sec-title">The Launch Plan —<br>Presented to the Client</h2>
+  <p class="sec-desc" style="margin-bottom:32px;">A 45-minute session with the client. This is the deliverable that confirms alignment on everything before execution begins.</p>
+
+  <div style="width:100%;max-width:880px;">
+    <div class="lp-slide"><div class="lp-num">1</div><div><div class="lp-name">Project Kickoff Title Slide</div><div class="lp-src">Prospect name, SEO score X/160, GEO score X/160, website screenshot</div></div><span class="lp-badge lp-gen">Generated</span></div>
+    <div class="lp-slide"><div class="lp-num">2</div><div><div class="lp-name">Goal & Supporting Deliverables</div><div class="lp-src">5-category overview: Content, Keyword Optimization, On-Page, Local Authority, AI Platform</div></div><span class="lp-badge lp-static">Static</span></div>
+    <div class="lp-slide"><div class="lp-num">3</div><div><div class="lp-name">Baseline Metrics</div><div class="lp-src">SEO Visibility + GEO / AI Visibility delta from SEMrush</div></div><span class="lp-badge lp-gen">Generated</span></div>
+    <div class="lp-slide"><div class="lp-num">4</div><div><div class="lp-name">Search Performance Dashboard</div><div class="lp-src">Organic sessions, impressions, CTR, avg. position, AI mentions, cited pages, share of voice</div></div><span class="lp-badge lp-gen">Generated</span></div>
+    <div class="lp-slide"><div class="lp-num">5</div><div><div class="lp-name">Executive Summary</div><div class="lp-src">Narrative summary from completed SEO/GEO assessment</div></div><span class="lp-badge lp-gen">Generated</span></div>
+    <div class="lp-slide"><div class="lp-num">6</div><div><div class="lp-name">Baseline Readiness: Dual Radar Charts</div><div class="lp-src">SEO Radar (5 dimensions) + GEO Radar (5 dimensions) with scores and gaps</div></div><span class="lp-badge lp-gen">Generated</span></div>
+    <div class="lp-slide"><div class="lp-num">7</div><div><div class="lp-name">Summary of Key Initiatives</div><div class="lp-src">4-quadrant view: Content, Keyword, Local Authority, AI Platform — with tier labels</div></div><span class="lp-badge lp-static">Static</span></div>
+    <div class="lp-slide"><div class="lp-num">8</div><div><div class="lp-name">Top Priorities / Unified Priority Matrix</div><div class="lp-src">Ranked action items with point impact (e.g., Implement Schema +20 pts)</div></div><span class="lp-badge lp-gen">Generated</span></div>
+    <div class="lp-slide"><div class="lp-num">9</div><div><div class="lp-name">Final Onboarding Items Checklist</div><div class="lp-src">All required access: GA4, GSC, CMS, hosting, GBP + business info, brand guidelines</div></div><span class="lp-badge lp-static">Static</span></div>
+  </div>
+
+  <div class="sfooter"><div class="flogo">ORANGE 142</div><div>9 / 11</div></div>
+  <div class="btn-row">
+    <a href="#slide-8" class="btn btn-ghost" onclick="goTo(8); return false;">← Back</a>
+    <a href="#slide-10" class="btn btn-p" onclick="goTo(10); return false;">Project Setup →</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SLIDE 10 — PROJECT SETUP & ASANA
+═══════════════════════════════════ -->
+<div class="slide slide-white" id="slide-10">
+  <div class="cw">
+    <div class="slide-hdr">
+      <div class="s-tag">Phase 3 → Phase 4</div>
+      <h2 class="s-title">Project Setup & Asana Build-Out</h2>
+      <p class="s-sub">We are now ready to build and lock the plan. All Launch Plan deliverables convert into tracked tasks with owners, dates, and dependencies.</p>
+    </div>
+
+    <div class="g2" style="margin-bottom:20px;">
+      <div class="card card-o">
+        <div class="ci">✅</div>
+        <div class="ct">Asana Project Build-Out</div>
+        <div class="cb">
+          All detailed items from the Launch Plan are added to Asana and broken out by month. Each task includes:<br><br>
+          • Assigned owner (role-specific)<br>
+          • Due date and dependencies<br>
+          • Linked resources and deliverables<br>
+          • Status tracking and completion criteria<br><br>
+          Services Lead reviews in weekly Service team meeting.
+        </div>
+      </div>
+      <div class="card card-b">
+        <div class="ci">📊</div>
+        <div class="ct">Dashboard & Reporting Setup</div>
+        <div class="cb">
+          SEO/GEO Product Owner creates the automated SEMrush report and parses data into the 10-metric dashboard view.<br><br>
+          External GDrive repo created for client-facing deliverables.<br><br>
+          Delivery inputs folder established for internal team collaboration.
+        </div>
+      </div>
+    </div>
+
+    <div class="alert as" style="margin:0 auto;">
+      <span class="aico">🚀</span>
+      <div><b>Ready for Monthly Delivery:</b> Once Asana is loaded, the dashboard is live, and all team members have confirmed their tasks, the engagement enters Phase 4: ongoing monthly delivery and reporting.</div>
+    </div>
+
+    <div class="links-row" style="margin-top:20px;">
+      <a class="link-btn" href="https://app.asana.com/0/portfolio/1210853293261707/1210861679035442" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Asana Project Board
+      </a>
+      <a class="link-btn" href="https://drive.google.com/open?id=1H6xckWnoT0d-ZYHR_b9qOorVXCWMScH2" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        10-Metric Dashboard
+      </a>
+    </div>
+  </div>
+  <div class="btn-row">
+    <a href="#slide-9" class="btn btn-ghost-dark" onclick="goTo(9); return false;">← Back</a>
+    <a href="#slide-11" class="btn btn-p" onclick="goTo(11); return false;">Monthly Delivery →</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SLIDE 11 — MONTHLY DELIVERY
+═══════════════════════════════════ -->
+<div class="slide slide-dark" id="slide-11">
+  <div class="bg-num">11</div>
+  <div class="sec-label">Phase 4</div>
+  <h2 class="sec-title">Monthly Delivery Rhythm</h2>
+  <p class="sec-desc" style="margin-bottom:32px;">Once live, every month follows a consistent execution and reporting loop. Here's what happens each month across all tiers.</p>
+
+  <div class="g3">
+    <div class="dcard">
+      <div class="ci">📝</div>
+      <div class="ct">Search Content Production</div>
+      <div class="cb">New articles (700 / 1,400 / 2,800 words/mo by tier) plus existing page refreshes (1–5 pages/mo).</div>
+    </div>
+    <div class="dcard">
+      <div class="ci">🔧</div>
+      <div class="ct">Technical Schema Work</div>
+      <div class="cb">1–4 hrs/month of code cleanup, schema markup, and AI optimization. Page speed, Core Web Vitals, internal linking.</div>
+    </div>
+    <div class="dcard">
+      <div class="ci">🔑</div>
+      <div class="ct">Keyword Optimization</div>
+      <div class="cb">5–24 keywords tracked across Google, Bing, and up to 4 AI platforms. On-page tuning, title/meta optimization.</div>
+    </div>
+    <div class="dcard">
+      <div class="ci">📍</div>
+      <div class="ct">Local & Authority</div>
+      <div class="cb">GBP optimization and monthly promotions. AI Trust & Authority program with high-authority publications (Best tier).</div>
+    </div>
+    <div class="dcard">
+      <div class="ci">🤖</div>
+      <div class="ct">AI Platform Optimization</div>
+      <div class="cb">Entity mapping maintenance, single-platform (Better) or multi-platform (Best: ChatGPT, Perplexity, Google AIO, Copilot).</div>
+    </div>
+    <div class="dcard">
+      <div class="ci">📊</div>
+      <div class="ct">Monthly Reporting</div>
+      <div class="cb">10–20 metrics tracked. Better/Best get real-time dashboard + quarterly executive report. Best tier gets competitive AI share-of-voice.</div>
+    </div>
+  </div>
+
+  <div class="sfooter"><div class="flogo">ORANGE 142</div><div>11 / 11</div></div>
+  <div class="btn-row">
+    <a href="#slide-10" class="btn btn-ghost" onclick="goTo(10); return false;">← Back</a>
+    <a href="#slide-12" class="btn btn-p" onclick="goTo(12); return false;">Roles & Responsibilities →</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     SLIDE 12 — ROLES & RESPONSIBILITIES
+═══════════════════════════════════ -->
+<div class="slide slide-green" id="slide-12">
+  <div class="bg-num">12</div>
+  <div class="sec-label" style="color:rgba(255,255,255,0.55);">Reference</div>
+  <h2 class="sec-title">Roles & Responsibilities</h2>
+  <p class="sec-desc" style="margin-bottom:32px;">Clear ownership across the E2E process. Know who owns what at every phase.</p>
+
+  <div style="width:100%;max-width:1000px;">
+    <table class="roles-table">
+      <thead>
+        <tr>
+          <th>Role</th>
+          <th>Primary Responsibilities</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="rbg r-sales">Sales / BDR / AM</span></td>
+          <td>Prospect identification, site analysis, pitch delivery, tier selection, DealHub quoting, contract close, setup fee collection</td>
+        </tr>
+        <tr>
+          <td><span class="rbg r-am">Account Manager</span></td>
+          <td>Client relationship, onboarding coordination, kickoff meeting facilitation, monthly status communication, escalation management</td>
+        </tr>
+        <tr>
+          <td><span class="rbg r-traffic">Account Traffic Director</span></td>
+          <td>Asana project creation, ILID assignment, Slack notifications, template initiation, internal repo setup</td>
+        </tr>
+        <tr>
+          <td><span class="rbg r-seo">SEO/GEO Product Owner</span></td>
+          <td>Technical audit, keyword research, SEMrush reporting, baseline metrics, dashboard creation, AI reports, ongoing optimization recommendations</td>
+        </tr>
+        <tr>
+          <td><span class="rbg r-creative">Creative Owner</span></td>
+          <td>AEO content development, content calendar, entity mapping, NER questionnaire, writer assignment, content review and approval</td>
+        </tr>
+        <tr>
+          <td><span class="rbg r-vendor">Vendor (Vendasta / External)</span></td>
+          <td>Technical implementation, CMS access, schema markup deployment, page speed optimization, code-level execution</td>
+        </tr>
+        <tr>
+          <td><span class="rbg r-svc">Services Lead</span></td>
+          <td>Cross-functional delivery coordination, Launch Plan assembly, internal review facilitation, Asana build-out, team alignment, stage gate enforcement</td>
+        </tr>
+        <tr>
+          <td><span class="rbg r-team">Team Leads</span></td>
+          <td>Weekly service team meeting participation, workstream review, resource allocation, quality assurance, deliverable sign-off</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sfooter" style="color:rgba(255,255,255,0.35);"><div class="flogo" style="color:#fff;">ORANGE 142 · DDH</div><div>CONFIDENTIAL — INTERNAL USE ONLY · 2026</div></div>
+  <div class="btn-row">
+    <a href="#slide-11" class="btn btn-ghost" onclick="goTo(11); return false;">← Back</a>
+    <a href="#slide-1" class="btn btn-p" style="background:#fff;color:#065f46;" onclick="goTo(1); return false;">↩ Start Over</a>
+  </div>
+</div>
+
+</div><!-- end deck -->
+
+<script>
+  const TOTAL = 12;
+  let cur = 1;
+  
+  function toggleTemplates() {
+    const modal = document.getElementById('templatesModal');
+    modal.classList.toggle('active');
+  }
+  
+  function buildDots() {
+    const c = document.getElementById('navDots');
+    c.innerHTML = '';
+    for (let i = 1; i <= TOTAL; i++) {
+      const d = document.createElement('div');
+      d.className = 'nav-dot' + (i===cur?' active':i<cur?' visited':'');
+      d.onclick = () => goTo(i);
+      d.title = 'Slide ' + i;
+      c.appendChild(d);
+    }
+    document.getElementById('slideCounter').textContent = cur + ' / ' + TOTAL;
+  }
+  function goTo(n) {
+    document.getElementById('slide-'+cur).classList.remove('active');
+    cur = n;
+    const el = document.getElementById('slide-'+cur);
+    el.classList.add('active');
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    buildDots();
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key==='ArrowRight'||e.key==='ArrowDown') { if(cur<TOTAL) goTo(cur+1); }
+    if (e.key==='ArrowLeft'||e.key==='ArrowUp') { if(cur>1) goTo(cur-1); }
+    if (e.key==='Escape') { document.getElementById('templatesModal').classList.remove('active'); }
+  });
+  
+  // Close modal when clicking outside
+  document.addEventListener('click', e => {
+    const modal = document.getElementById('templatesModal');
+    if (e.target === modal) {
+      modal.classList.remove('active');
+    }
+  });
+  
+  buildDots();
+</script>
+</body>
+</html>
